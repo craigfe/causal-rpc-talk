@@ -1,0 +1,68 @@
+\begin{tikzpicture}
+  [ circ/.style= {circle
+    , draw
+    , very thick
+    , inner sep=0pt
+    , minimum size=7pt}
+  , done/.style={draw=TabGreen}
+  , doneish/.style={draw=TabGreen}
+  , todo/.style={color=gray}
+  , label distance=4mm
+  , node distance = 1cm
+  , on grid
+  ]
+  \def\xsep{1.4cm}
+  \def\ysep{2cm}
+  \def\ybez{1.4}
+  \tikzset{>=stealth}
+
+  \onslide<1->{
+    \node[circ, done, label=right:{\pbox{10cm}{\relax\ifvmode\centering\fi
+        Point-to-point RPC
+      }}] (a) at (0,0) {};
+
+    \node[circ, done, below left = \ysep and \xsep of a, label=left:{\pbox{10cm}{\relax\ifvmode\centering\fi
+        Distributed \\work clusters
+      }}] (b) {};
+    \draw[->, very thick, done] (a) .. controls +(0,-\ybez) and +(0,\ybez) .. (b);
+
+    \node[circ, doneish, below right = \ysep and \xsep of a, label=right:{\pbox{10cm}{\relax\ifvmode\centering\fi
+        Remote functor
+      }}] (c) {};
+    \draw[->, very thick, doneish] (a) .. controls +(0,-\ybez) and +(0,\ybez) .. (c);
+  }
+
+  \onslide<2->{
+    \coordinate (in-middle) at ($ (b)!0.5!(c) $);
+    \node[circ, todo, below left = 2*\ysep and \xsep of a, color=gray, label=below:{\pbox{10cm}{\relax\ifvmode\centering\fi
+        \textcolor{gray}{Hybrid Irmin}\\\textcolor{gray}{backend}
+      }}] (h1) {};
+    \draw[->, very thick, color=gray, dotted] (a) -- (in-middle) .. controls +(0,-\ybez) and +(0,\ybez) .. (h1);
+  }
+
+  % There's a lot of generic programming holding the IDL together, almost all of which is fully
+  % determined at compile time when the Interface and Implementation modules are defined. This is a
+  % classic use-case of multistage programming, so we might expect significant performance
+  % improvements with that addition.
+  \onslide<3->{
+    \node[circ, todo, right = 2*\xsep of h1, color=gray, label=below:{\pbox{10cm}{\relax\ifvmode\centering\fi
+        \textcolor{gray}{Staged type}\\\textcolor{gray}{witnesses}\textsuperscript{1}
+      }}] (h3) {};
+    \draw[->, very thick, color=gray, dotted] (a) -- (in-middle) .. controls +(0,-\ybez) and +(0,\ybez) .. (h3);
+  }
+
+  \onslide<4->{
+    \node[circ, todo, left = 2*\xsep of h1, color=gray, label={below:{\pbox{10cm}{\relax\ifvmode\centering\fi
+          \textcolor{gray}{Weakened}\\\textcolor{gray}{Merkle tree}}
+      }}] (h2) {};
+    \draw[->, very thick, color=gray, dotted] (b) .. controls +(0,-\ybez) and +(0,\ybez) .. (h2);
+  }
+
+  \onslide<5->{
+    \node[circ, todo, right = 2*\xsep of h3, color=gray, label=below:{\pbox{10cm}{\relax\ifvmode\centering\fi
+        \textcolor{gray}{Selective}\\\textcolor{gray}{applicatives}\textsuperscript{2}
+      }}] (h4) {};
+    \draw[->, very thick, color=gray, dotted] (c) .. controls +(0,-\ybez) and +(0,\ybez) .. (h4);
+  }
+
+\end{tikzpicture}

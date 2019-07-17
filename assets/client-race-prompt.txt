@@ -1,0 +1,1 @@
+[*\aftergroup\gitcolorred*]$[*\special{color pop}*] git log

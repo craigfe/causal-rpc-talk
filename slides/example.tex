@@ -1,0 +1,67 @@
+\usetikzlibrary{positioning}
+\usetikzlibrary{calc}
+
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\begin{tikzpicture}
+  [commit/.style={circle,minimum size=0.6cm,draw=black}
+  , alpha/.style={fill=green!20}
+  , beta/.style={fill=blue!20}
+  , server/.style={fill=red!20}
+  , message/.style={anchor=west,text width=6cm,font=\footnotesize}
+  , legendicon/.style={regular polygon, regular polygon sides=4}
+  , grey/.style={color=gray}
+  , node distance=1.5cm
+  , on grid
+	, arrow={->,>=stealth}
+  ]
+
+  \matrix[anchor=north] at (-3, 1) {
+    \only<1>{\node [legendicon, draw=white, fill=white, label=right:\textcolor{white}{Server}] {};}%
+    \only<2->{\node [legendicon, draw, fill=red!20, label=right:Server] {};} \\
+    \node [legendicon, draw, fill=green!20, label=right:Client alpha] {}; \\
+    \only<4->{\node [legendicon, draw, fill=blue!20, label=right:Client beta] {};} \\
+  };
+
+  \coordinate (messageline) at (2,0);
+  \node[commit, alpha] (A) {0};
+  \node[message, right = 4cm of A] (Am) {\textsc{Request:} \texttt{add(1)}};
+  \pause
+
+  \node[commit, server, below = of A] (B) {1};
+  \draw[->] (A) edge node[right,grey] {+1} (B);
+  \node[message, right = 4cm of B] (Bm) {\textsc{Perform:} \texttt{add(1)}};
+  
+  \pause
+  \node[commit, alpha, below = of B, xshift=1cm] (C) {1};
+  \draw[->] (B) .. controls +(0,-1) and +(0,1) .. (C);
+  \node[message, right = 4cm of C] (Cm) {\textsc{Request:} \texttt{multiply(4)}};
+
+  \pause
+  \node[commit, beta, below = of B, xshift=-1cm] (E) {1};
+  \draw[->] (B) .. controls +(0,-1) and +(0,1) .. (E);
+  \node[message, anchor=east, left = 8mm of E] (Em) {\textsc{Request:} \texttt{add(2)}};
+  
+  \pause
+  \node[commit, server, below = of C] (D) {4};
+  \draw[->] (C) edge node[right, gray] {$\times 4$} (D);
+  \node[message, right = 4cm of D] (Dm) {\textsc{Perform:} \texttt{multiply(4)}};
+  
+  \pause
+  \node[commit, server, below = of E] (F) {3};
+  \draw[->] (E) edge node[right, gray] {+2} (F);
+  \node[message, anchor=east, left = 8mm of F] (Fm) {\textsc{Perform:} \texttt{add(2)}};
+
+  \pause
+  \node[commit, server, below = of F, xshift=1cm] (G) {6};
+  \draw[->] (F) .. controls +(0,-1) and +(0,1) .. (G);
+  \draw[->] (D) .. controls +(0,-1) and +(0,1) .. (G);
+  \node[message, right = 4cm of G] (Gm) {\textsc{Merge:} \texttt{alpha} \& \texttt{beta}};
+
+
+  % \pause
+  % \node[commit, beta, below = of C] (D) {};
+  % \draw[->] (C) edge (D);
+  % \node[message] (Dm) at (messageline |- 0, 0 |- D) {Something else};
+  % \pause
+\end{tikzpicture}

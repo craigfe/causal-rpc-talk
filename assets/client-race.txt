@@ -1,0 +1,8 @@
+* [*\aftergroup\gitcoloryellow*]server[*\special{color pop}*] Initialised Filesystem store
+[*\aftergroup\gitcolorgreen*]|[*\special{color pop}*][*\aftergroup\gitcolorgreen*]\[*\special{color pop}*]  
+* [*\aftergroup\gitcolorgreen*]|[*\special{color pop}*] [*\aftergroup\gitcoloryellow*]clientA[*\special{color pop}*] Request <move>: /tmp/sharedFile -> /log/sharedFile
+* [*\aftergroup\gitcolorgreen*]|[*\special{color pop}*] [*\aftergroup\gitcoloryellow*]server[*\special{color pop}*] ([*\aftergroup\gitcolorgreen*]client--a[*\special{color pop}*]) Perform <move> for clientA
+[*\aftergroup\gitcolorred*]|[*\special{color pop}*] * [*\aftergroup\gitcoloryellow*]clientB[*\special{color pop}*] Request <append>: /tmp/sharedFile
+[*\aftergroup\gitcolorred*]|[*\special{color pop}*] * [*\aftergroup\gitcoloryellow*]server[*\special{color pop}*][*\aftergroup\gitcoloryellow*] [*\special{color pop}*] Perform <append> operation for clientB
+[*\aftergroup\gitcolorred*]|[*\special{color pop}*][*\aftergroup\gitcolorgreen*]/[*\special{color pop}*]  
+*   [*\aftergroup\gitcoloryellow*]server[*\special{color pop}*][*\aftergroup\gitcoloryellow*] [*\special{color pop}*]([*\aftergroup\gitcolorgreen*]server[*\special{color pop}*], [*\aftergroup\gitcolorgreen*]client--b[*\special{color pop}*]) Merge client--b into server
