@@ -2,7 +2,6 @@
 **/_build/
 out/
 
-*.pdf
 *.aux
 *.fdb_latexmk
 *.fls
@@ -12,3 +11,4 @@ out/
 *.snm
 *.sta
 *.synctex.gz
+*.toc
